@@ -12,11 +12,11 @@ $aModule = array(
     'id'           => 'jxattredit',
     'title'        => 'jxAttrEdit - Product Attibute Editor',
     'description'  => array(
-                        'de' => 'Attribut Editor für Produkte.',
+                        'de' => 'Attribut-Editor für Produkte.',
                         'en' => 'Attribute Editor for Products.'
                         ),
     'thumbnail'    => 'jxattredit.png',
-    'version'      => '0.2',
+    'version'      => '0.3',
     'author'       => 'Joachim Barthel',
     'url'          => 'https://github.com/job963/jxAttrEdit',
     'email'        => 'jbarthel@qualifire.de',
