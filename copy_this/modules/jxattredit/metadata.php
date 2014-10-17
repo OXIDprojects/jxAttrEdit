@@ -23,7 +23,7 @@ $aModule = array(
     'extend'       => array(
                         ),
     'files'        => array(
-        'article_jxattredit' => 'jxattredit/application/controllers/admin/article_jxattredit.php'
+        'article_jxattredit' => 'jxattredit/controllers/admin/article_jxattredit.php'
                         ),
     'templates'    => array(
         'article_jxattredit.tpl' => 'jxattredit/views/admin/tpl/article_jxattredit.tpl'

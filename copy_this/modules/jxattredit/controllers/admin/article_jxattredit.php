@@ -37,12 +37,12 @@ class article_jxattredit extends oxAdminView
         $myConfig = $this->getConfig();
 
         parent::render();
-        $oSmarty = oxUtilsView::getInstance()->getSmarty();
+        $oSmarty = oxRegistry::get('oxUtilsView')->getSmarty();
         $oSmarty->assign( "oViewConf", $this->_aViewData["oViewConf"]);
         $oSmarty->assign( "shop", $this->_aViewData["shop"]);
         
         $this->_aViewData["edit"] = $oArticle = oxNew( "oxarticle");
-        $soxId = oxConfig::getParameter( "oxid");
+        $soxId = $myConfig->getRequestParameter( "oxid");
         
         if ( $soxId != "-1" && isset( $soxId)) {
             // load object
@@ -163,10 +163,10 @@ class article_jxattredit extends oxAdminView
      
      public function saveAllAttrs($sOXID = null, $aParams = null)
      {
-
+        $oConf = $this->getConfig();
         if ( !isset( $sOXID ) && !isset( $aParams ) ) {
-            $sOXID   = oxConfig::getParameter( "voxid" );
-            $aParams = oxConfig::getParameter( "editval" );
+            $sOXID   = $oConf->getRequestParameter( "voxid" );
+            $aParams = $oConf->getRequestParameter( "editval" );
         }
          
         // for later, on inserting new attribute values
@@ -174,16 +174,16 @@ class article_jxattredit extends oxAdminView
             // --->  $sUid = oxUtilsObject::getInstance()->generateUID();
             // --->  echo "-".$sUid."-<hr>";
                 //array_push($aAttrList, $rs1->fields);
-        $sOXID = oxConfig::getParameter( "oxid" );
+        $sOXID = $oConf->getRequestParameter( "oxid" );
         $sOxvObject2Attribute = getViewName( 'oxobject2attribute', $this->_iEditLang, $sShopID );
         $oDb = oxDb::getDb();
         
         $sSql = "";
-        $iRows = oxConfig::getParameter( "rownum" );
+        $iRows = $oConf->getRequestParameter( "rownum" );
         for ($i = 1; $i <= $iRows; $i++) {
-            $sValueID = oxConfig::getParameter( "oxvalueid_$i" );
-            $sAttrID = oxConfig::getParameter( "oxattrid_$i" );
-            $sAttrValue = oxConfig::getParameter( "attrval_$i" );
+            $sValueID = $oConf->getRequestParameter( "oxvalueid_$i" );
+            $sAttrID = $oConf->getRequestParameter( "oxattrid_$i" );
+            $sAttrValue = $oConf->getRequestParameter( "attrval_$i" );
             
             $sSql = "";
             
@@ -196,7 +196,7 @@ class article_jxattredit extends oxAdminView
             }
             
             if (($sValueID == '') && ($sAttrValue != '')) {   //attribute doesn't exists, value received --> insert new value
-                $sNewUid = oxUtilsObject::getInstance()->generateUID();
+                $sNewUid = oxRegistry::get('oxUtilsObject')->generateUID();
                 $sSql = "INSERT INTO $sOxvObject2Attribute (OXID, OXOBJECTID, OXATTRID, OXVALUE, OXPOS) VALUES ('$sNewUid', '$sOXID', '$sAttrID', '$sAttrValue', 0)";
             }
             
