@@ -42,7 +42,7 @@ class article_jxattredit extends oxAdminView
         $oSmarty->assign( "shop", $this->_aViewData["shop"]);
         
         $this->_aViewData["edit"] = $oArticle = oxNew( "oxarticle");
-        $soxId = $myConfig->getReqeustParameter( "oxid");
+        $soxId = $myConfig->getRequestParameter( "oxid");
         
         if ( $soxId != "-1" && isset( $soxId)) {
             // load object
